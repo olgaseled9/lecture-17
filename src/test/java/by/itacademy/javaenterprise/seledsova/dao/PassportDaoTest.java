@@ -2,6 +2,7 @@ package by.itacademy.javaenterprise.seledsova.dao;
 
 import by.itacademy.javaenterprise.seledsova.dao.impl.PassportDaoImpl;
 import by.itacademy.javaenterprise.seledsova.entity.Passport;
+import org.junit.After;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -9,9 +10,9 @@ import org.mockito.Mockito;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
-
+import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.mockito.Mockito.when;
 
 public class PassportDaoTest {
 
@@ -31,17 +32,8 @@ public class PassportDaoTest {
         Passport passport = new Passport();
         Long id = 1L;
         passport.setPassportId(id);
-        Class<Passport> anyObject = Mockito.any();
-        Long eqValue = Mockito.eq(id);
-        when(entityManagerMock.find(anyObject, eqValue)).thenReturn(passport);
+        when(entityManagerMock.find(Passport.class, id)).thenReturn(passport);
         assertEquals(id, passportDao.findPassportById(id).getPassportId());
-    }
-
-    @Test
-    void shouldSavePassportWithEntityNullTest() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            passportDao.savePassport(null);
-        });
     }
 
     @Test
@@ -49,5 +41,19 @@ public class PassportDaoTest {
         Long id = -1L;
         assertNull(passportDao.findPassportById(id));
     }
-}
 
+    @Test
+    public void shouldSavePassportTest() {
+        Long id = 4L;
+        Passport passport = new Passport();
+        passport.setPassportId(4L);
+        passport.setNumber(11114);
+        when(entityManagerMock.find(Passport.class, id)).thenReturn(passport);
+        assertEquals(passport.getPassportId(), id);
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        entityManagerMock.close();
+    }
+}

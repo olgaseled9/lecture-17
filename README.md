@@ -9,6 +9,11 @@
 8. Create DAO (use EntityManager) for POJOs with 2 method: save(pojo) and find(id)
 9. Tests
 
+# Start script
+ docker-compose up -d
+# start migrations:
+ mvn flyway:migrate
+
 # Completed items
 1. Git repo lecture-16
 2. README file with rules from lecture DONE
@@ -19,3 +24,4 @@
 7. Configure POJO mapping with JPA annotations DONE
 8. Create DAO (use EntityManager) for POJOs with 2 method: save(pojo) and find(id) DONE
 9. Tests DONE
+

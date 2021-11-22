@@ -18,6 +18,5 @@
             <property name="format_sql" value="true"/>
         </properties>
     </persistence-unit>
-
 </persistence>
 
