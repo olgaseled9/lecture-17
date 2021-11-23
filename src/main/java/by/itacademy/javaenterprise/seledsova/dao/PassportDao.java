@@ -8,5 +8,8 @@ public interface PassportDao {
 
     Passport findPassportById(long id);
 
+    void updatePassport(Passport passport);
+
+    void deletePassport(Long id);
 }
 

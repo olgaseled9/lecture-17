@@ -8,4 +8,7 @@ public interface PersonDao {
 
     Person findPersonById(long id);
 
+    void updatePerson(Person person);
+
+    void deletePerson(Long id);
 }

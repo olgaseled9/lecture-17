@@ -54,6 +54,31 @@ public class PersonDaoTest {
         assertEquals(person.getId(), id);
     }
 
+    @Test
+    public void shouldDeletePersonTest() {
+        Long id = 2L;
+        Person person = new Person();
+        person.setId(id);
+        when(entityManagerMock.getTransaction()).thenReturn(entityTransactionMock);
+        when(entityManagerMock.find(Person.class, id)).thenReturn(person).thenReturn(null);
+        personDao.deletePerson(id);
+        assertNull(personDao.findPersonById(id));
+    }
+
+    @Test
+    void shouldUpdatePassportTest() {
+        Long id = 8L;
+        Person person = new Person();
+        person.setId(id);
+        person.setFirstName("Elvis");
+        person.setLastName("Presley");
+        person.setPatronymic("Ivanov");
+        when(entityManagerMock.getTransaction()).thenReturn(entityTransactionMock);
+        when(entityManagerMock.find(Person.class, id)).thenReturn(person);
+        personDao.updatePerson(person);
+        assertEquals(person.getId(), id);
+    }
+
     @After
     public void tearDown() throws Exception {
         entityManagerMock.close();

@@ -1,18 +1,19 @@
 package by.itacademy.javaenterprise.seledsova.entity;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "Passports")
-public class Passport implements Serializable {
+public class Passport {
 
     @Id
     @SequenceGenerator(name = "Passport_passport_id_seq", sequenceName = "Passport_passport_id_seq", allocationSize = 1)
@@ -29,6 +30,14 @@ public class Passport implements Serializable {
     public Passport(Long passportId, Integer number) {
         this.passportId = passportId;
         this.number = number;
+    }
+
+    @Override
+    public String toString() {
+        return "Passport{" +
+                "passportId=" + passportId +
+                ", number=" + number +
+                '}';
     }
 }
 

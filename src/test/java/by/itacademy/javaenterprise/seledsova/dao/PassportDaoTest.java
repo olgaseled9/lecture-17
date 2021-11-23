@@ -52,8 +52,32 @@ public class PassportDaoTest {
         assertEquals(passport.getPassportId(), id);
     }
 
+    @Test
+    public void shouldDeletePassportTest() {
+        Long id = 2L;
+        Passport passport = new Passport();
+        passport.setPassportId(id);
+        when(entityManagerMock.getTransaction()).thenReturn(entityTransactionMock);
+        when(entityManagerMock.find(Passport.class, id)).thenReturn(passport).thenReturn(null);
+        passportDao.deletePassport(id);
+        assertNull(passportDao.findPassportById(id));
+    }
+
+    @Test
+    void shouldUpdatePassportTest() {
+        Long id = 8L;
+        Passport passport = new Passport();
+        passport.setPassportId(id);
+        passport.setNumber(12124);
+        when(entityManagerMock.getTransaction()).thenReturn(entityTransactionMock);
+        when(entityManagerMock.find(Passport.class, id)).thenReturn(passport);
+        passportDao.updatePassport(passport);
+        assertEquals(passport.getPassportId(), id);
+    }
+
     @After
     public void tearDown() throws Exception {
         entityManagerMock.close();
     }
+
 }
